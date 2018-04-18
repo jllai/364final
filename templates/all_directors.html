@@ -1,0 +1,26 @@
+<h1>Saved Directors</h1>
+
+<ul>
+{% for d in directors %}
+	{% if d.saved == 1 %}
+    <li>
+        <h2>{{ d.name }}</h2>
+        <body>{{ d.bio }}</body>
+    </li>
+    {% endif %}
+{% endfor %}
+</ul>
+
+{% block content %}
+<div>
+{% for message in get_flashed_messages() %}
+<strong>*** {{ message }} ***</strong>
+{% endfor %}
+</div>
+
+{% endblock %}
+
+{% extends 'base.html' %}
+{% block navigation %}
+ {{ super() }}
+{% endblock %}

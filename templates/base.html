@@ -1,0 +1,13 @@
+{% block navigation %}
+
+<p>--------</p>
+<ul>
+	<li><a href="{{ url_for('login') }}">Log in</a></li>
+	<li><a href="{{ url_for('logout') }}">Log out</a></li>
+ 	<li><a href="{{ url_for('index') }}">Home</a></li>
+	<li><a href="{{ url_for('all_movies') }}">My Movies</a></li>
+	<li><a href="{{ url_for('all_directors') }}">My Directors</a></li>
+	<li><a href="{{ url_for('all_actors') }}">My Actors</a></li>
+</ul>
+
+{% endblock %}

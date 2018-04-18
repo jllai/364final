@@ -1,0 +1,36 @@
+<h1>Saved Movies</h1>
+
+<ul>
+{% for m in movies %}
+	{% if m.saved == 1 %}
+    <li>
+        <h2>{{ m.title }}</h2>
+        <h4><b>Overall rating:</b> {{ m.rating }} ---- <b>Personal Rating:</b> {{ m.personal_rating }}</h4>
+        <body>{{ m.desc }}</body>
+    </li><br>
+    <form method="POST" action="/delete/{{ m.title }}">
+    	{{ form.hidden_tag() }}
+    	{{ form.submit_del() }}
+    </form>
+    <form method="POST" action="/update/{{ m.title }}">
+    	{{ form.hidden_tag() }}
+    	{{ form.personal_rating.label }} {{ form.personal_rating() }}
+    	{{ form.submit_rating() }}
+    </form>
+    {% endif %}
+{% endfor %}
+</ul>
+
+{% block content %}
+<div>
+{% for message in get_flashed_messages() %}
+<strong>*** {{ message }} ***</strong>
+{% endfor %}
+</div>
+
+{% endblock %}
+
+{% extends 'base.html' %}
+{% block navigation %}
+ {{ super() }}
+{% endblock %}

@@ -1,0 +1,27 @@
+<h1> Results </h1>
+
+{% block content %}
+<ul>
+{% for m in movies %}
+<li>
+  <h4>{{ m['title'] }}</h4>
+  <h5>{{ m['release_date'] }}
+  <br>
+<!--   <iframe src="https://www.themoviedb.org/{{ m['posterpath'] }}" width="50" height="auto" frameBorder="0" ></iframe>
+  <br> -->
+  <body>{{ m['overview'] }}</body>
+  <p>
+  <form method = "POST" action="/movie/{{ m['id'] }}">
+  	{{ form.hidden_tag() }}
+  	{{ form.submit() }}
+  </form>
+</li>
+<br>
+{% endfor %}
+</ul>
+{% endblock %}
+
+{% extends 'base.html' %}
+{% block navigation %}
+ {{ super() }}
+{% endblock %}

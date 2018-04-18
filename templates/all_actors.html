@@ -1,0 +1,29 @@
+<h1>Saved Actors</h1>
+
+<ul>
+{% for actor in actors %}
+    <li>
+        <h2>{{ actor.name }}</h2>
+        <body>{{ actor.bio }}</body>
+        <h4>Known for:</h4>
+        <ul>
+          {% for movie in actor.movies %}
+          <li>{{ movie }}</li>
+          {% endfor %}
+        </ul>
+{% endfor %}
+</ul>
+
+{% block content %}
+<div>
+{% for message in get_flashed_messages() %}
+<strong>*** {{ message }} ***</strong>
+{% endfor %}
+</div>
+
+{% endblock %}
+
+{% extends 'base.html' %}
+{% block navigation %}
+ {{ super() }}
+{% endblock %}

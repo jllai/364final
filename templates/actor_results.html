@@ -1,0 +1,28 @@
+<h1> Results </h1>
+
+{% block content %}
+<ul>
+{% for a in actors %}
+<li>
+  <h2>{{ a['name'] }}</h2>
+    <h4>Known for:</h4>
+        <ul>
+          {% for movie in a['known_for'] %}
+          <li>{{ movie['title'] }} -- {{ movie['vote_average'] }}</li>
+          {% endfor %}
+        </ul>
+        <p>
+  <form method = "POST" action="/actor/{{ a['id'] }}">
+  	{{ form.hidden_tag() }}
+  	{{ form.submit() }}
+  </form>
+</li>
+<br>
+{% endfor %}
+</ul>
+{% endblock %}
+
+{% extends 'base.html' %}
+{% block navigation %}
+ {{ super() }}
+{% endblock %}

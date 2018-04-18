@@ -1,0 +1,27 @@
+{% if current_user.is_authenticated %}
+<p>Welcome, {{ current_user.name }}</p> <img height="50" width="50" src="{{ current_user.avatar }}" />
+{% endif %}
+<p>
+
+<h1>Find your next favorite movie!</h1> 
+
+{% block content %}
+<form method="POST">
+	{{ form.hidden_tag() }}
+	{{ form.movie.label }} {{ form.movie() }}<p>
+	{{ form.actor.label }} {{ form.actor() }}<p>
+	{{ form.submit() }}
+</form>
+
+<div>
+{% for message in get_flashed_messages() %}
+    {{ message }}
+{% endfor %}
+</div>
+{% endblock %}
+
+
+{% extends 'base.html' %}
+{% block navigation %}
+ {{ super() }}
+{% endblock %}
