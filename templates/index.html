@@ -9,6 +9,8 @@
 <form method="POST">
 	{{ form.hidden_tag() }}
 	{{ form.movie.label }} {{ form.movie() }}<p>
+</form>
+<form method='GET'>
 	{{ form.actor.label }} {{ form.actor() }}<p>
 	{{ form.submit() }}
 </form>

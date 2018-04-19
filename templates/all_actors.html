@@ -8,7 +8,7 @@
         <h4>Known for:</h4>
         <ul>
           {% for movie in actor.movies %}
-          <li>{{ movie }}</li>
+          <li>{{ movie }} -- {{ movie.rating }}</li>
           {% endfor %}
         </ul>
 {% endfor %}

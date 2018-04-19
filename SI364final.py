@@ -3,7 +3,6 @@
 ###############################
 
 ## Import statements
-# Import statements
 import os
 import requests
 import json
@@ -57,7 +56,7 @@ def make_shell_context():
 # Add function use to manager
 manager.add_command("shell", Shell(make_context=make_shell_context))
 
-# OAuth configuration
+# OAuth configuration -- code lifted from Lecture 13
 class Auth:
     """Google Project Credentials"""
     CLIENT_ID = ('696837306131-q8s3csk0sa0t5b3dhrof60beid7o87he.apps.googleusercontent.com') # Keep the parentheses in THIS line!
@@ -123,7 +122,6 @@ users_directors = db.Table('users_directors',db.Column('director_id',db.Integer,
 ######################################
 ########      HELPER FXN      ########
 ######################################
-
 def get_movie_info(movie):
     if type(movie) == str:
         base_url = 'https://api.themoviedb.org/3/search/movie?query='
@@ -288,8 +286,6 @@ class SearchForm(FlaskForm):
             print(field.data)
             raise ValidationError('Movie title too long!')
 
-    # def validate_director(field, self):
-
 class Save(FlaskForm):
     submit = SubmitField("Save")
 
@@ -300,7 +296,7 @@ class ButtonForm(FlaskForm):
 
     def validate_personal_rating(self, field):
         if float(field.data) < 0 or float(field.data) > 10:
-            raise ValidationError('Rating outside of range!')
+            raise ValidationError("Rating outside of range!")
 
 
 #######################
@@ -322,15 +318,16 @@ def internal_server_error(e):
 @app.route('/', methods=["GET", "POST"])
 def index():
     form = SearchForm()
-    if form.validate_on_submit():
-        if form.actor.data == '' and form.director.data == '':
-            save_form = Save()
-            movie_info = get_movie_info(form.movie.data)
-            return render_template('movie_results.html', movies=movie_info['results'], form=save_form)
-        elif form.movie.data == '' and form.director.data == '':
-            save_form = Save()
-            actor_info = get_person_info(form.actor.data)
-            return render_template('actor_results.html', actors=actor_info['results'], form=save_form)
+    if form.validate_on_submit() and form.actor.data == '':
+        save_form = Save()
+        movie_info = get_movie_info(form.movie.data)
+        return render_template('movie_results.html', movies=movie_info['results'], form=save_form)
+    elif request.args and request.args.get('movie') == None:
+        save_form = Save()
+        actor_info = get_person_info(request.args.get('actor'))
+        return render_template('actor_results.html', actors=actor_info['results'], form=save_form)
+    else:
+        flash("***Cannot fill in both search forms!***")
 
     return render_template('index.html', form=form)
 
@@ -350,7 +347,6 @@ def movie_results(id):
 def all_movies():
     form = ButtonForm()
     movies = current_user.movies.all()
-    print(movies)
     return render_template('all_movies.html',movies=movies, form=form)
 
 @app.route('/actor/<id>', methods=['GET','POST'])
@@ -379,9 +375,9 @@ def update(movie):
         m = Movie.query.filter_by(title=movie).first()
         m.personal_rating = personal_rating
         db.session.commit()
-        flash("Updated rating of " + movie + "***")
+        flash("Updated rating of " + movie)
         return redirect(url_for('all_movies'))
-
+    return redirect(url_for('all_movies'))
 # deletes the movie from your saved movies
 @app.route('/delete/<movie>',methods=["GET","POST"])
 def delete(movie):
