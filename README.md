@@ -1,32 +1,34 @@
-FINAL PROJECT IDEA: Movies descriptor
+### FINAL PROJECT IDEA: Movies descriptor
+
+## Quick Summary
 
 This application allows users to register and sign in to their own personal movies collection. They'll be able to search for any movie on TMDb and see the ratings and critic reviews for the movie that they search for. They can also look for any actor or director for their filmography and add it to a personal collection. They'll be able to personally rate the movies that they watch, and will have 3 sections: saved directors, saved actors, and saved movies. 
 
-
+## How to use the program
 
 The user will need to first log into their google account for the program to work. They will follow the log in link to do so. After that, they can either choose to look up a movie or look up an actor. For example, they can type in "Baby Driver" in the first stringfield. This will bring them to a page with a potential list of movies and their description. The user saves the movie they want to save, which will bring them to their list of movies. From here, they can personally rate the movie once they've seen it by typing their rating into the stringfield provided for each movie. The same occurs for the actor searchbar, minus the rating part.
 
-
+## Modules
 
 No additional modules are used
 
 
 
-ROUTES:
+## ROUTES:
 
-/ --> index.html
-/all_actors --> all_actors.html
-/all_directors --> all_directors.html
-/all_movies --> all_movies.html
-/movie_results --> loads the search data from movies form
-/movie/<id> --> processes the data and redirects to /all_movies
-/actor_results --> loads the search data from actors form
-/actor/<id> --> process the data and redirects to /all_actors
-/update/<movie> --> updates movie rating, redirects to /all_movies
-/delete/<movie> --> deletes movie object from db
+* / --> index.html
+* /all_actors --> all_actors.html
+* /all_directors --> all_directors.html
+* /all_movies --> all_movies.html
+* /movie_results --> loads the search data from movies form
+* /movie/<id> --> processes the data and redirects to /all_movies
+* /actor_results --> loads the search data from actors form
+* /actor/<id> --> process the data and redirects to /all_actors
+* /update/<movie> --> updates movie rating, redirects to /all_movies
+* /delete/<movie> --> deletes movie object from db
 
 
-CHECKLIST:
+## CHECKLIST:
 
  ** user should be able to load http://localhost:5000 and see the first page they ought to see on the application.**
 
