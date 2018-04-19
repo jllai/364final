@@ -1,4 +1,4 @@
-### FINAL PROJECT IDEA: Movies descriptor
+# Final project: Find your next favorite movie!
 
 ## Quick Summary
 
@@ -14,7 +14,7 @@ No additional modules are used
 
 
 
-## ROUTES:
+## Routes:
 
 * / --> index.html
 * /all_actors --> all_actors.html
@@ -28,7 +28,7 @@ No additional modules are used
 * /delete/<movie> --> deletes movie object from db
 
 
-## CHECKLIST:
+## Checklist:
 
  ** user should be able to load http://localhost:5000 and see the first page they ought to see on the application.**
 
