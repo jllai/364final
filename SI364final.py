@@ -279,9 +279,9 @@ class SearchForm(FlaskForm):
     director = StringField("What director would you like to look up?")
     submit = SubmitField('submit')
 
-    # def validate_actor(field, self):
-    #     if ' ' not in field.data:
-    #         raise ValidationError("Needs last name!")
+    def validate_actor(field, self):
+        if ' ' not in field.data:
+            raise ValidationError("Needs last name!")
 
 class Save(FlaskForm):
     submit = SubmitField("Save")
