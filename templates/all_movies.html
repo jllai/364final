@@ -1,3 +1,6 @@
+{% extends 'base.html' %}
+{% block content %}
+
 <h1>Saved Movies</h1>
 
 <ul>
@@ -21,16 +24,13 @@
 {% endfor %}
 </ul>
 
-{% block content %}
+{% block contents %}
 <div>
 {% for message in get_flashed_messages() %}
 <strong>*** {{ message }} ***</strong>
 {% endfor %}
 </div>
-
 {% endblock %}
 
-{% extends 'base.html' %}
-{% block navigation %}
- {{ super() }}
+
 {% endblock %}

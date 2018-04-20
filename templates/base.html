@@ -1,6 +1,5 @@
 {% block navigation %}
 
-<p>--------</p>
 <ul>
 	<li><a href="{{ url_for('login') }}">Log in</a></li>
 	<li><a href="{{ url_for('logout') }}">Log out</a></li>
@@ -9,5 +8,9 @@
 	<li><a href="{{ url_for('all_directors') }}">My Directors</a></li>
 	<li><a href="{{ url_for('all_actors') }}">My Actors</a></li>
 </ul>
+<p>--------</p>
 
+{% endblock %}
+
+{% block content %}
 {% endblock %}

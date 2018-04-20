@@ -279,9 +279,9 @@ class SearchForm(FlaskForm):
     director = StringField("What director would you like to look up?")
     submit = SubmitField('submit')
 
-    def validate_actor(field, self):
-        if ' ' not in field.data:
-            raise ValidationError("Needs last name!")
+    # def validate_actor(field, self):
+    #     if ' ' not in field.data:
+    #         raise ValidationError("Needs last name!")
 
 class Save(FlaskForm):
     submit = SubmitField("Save")
@@ -319,7 +319,8 @@ def index():
         save_form = Save()
         movie_info = get_movie_info(form.movie.data)
         return render_template('movie_results.html', movies=movie_info['results'], form=save_form)
-    if request.args and request.args.get('movie') == None:
+    elif request.args and request.args.get('movie') == None:
+        print(request.args.get('movie'))
         save_form = Save()
         actor_info = get_person_info(request.args.get('actor'))
         return render_template('actor_results.html', actors=actor_info['results'], form=save_form)

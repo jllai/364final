@@ -1,6 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
 <h1> Results </h1>
 
-{% block content %}
+{% block contents %}
 <ul>
 {% for a in actors %}
 <li>
@@ -22,7 +26,4 @@
 </ul>
 {% endblock %}
 
-{% extends 'base.html' %}
-{% block navigation %}
- {{ super() }}
 {% endblock %}
