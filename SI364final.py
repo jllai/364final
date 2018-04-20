@@ -404,6 +404,7 @@ def login():
 
 @app.route('/gCallback')
 def callback():
+    print('work')
     if current_user is not None and current_user.is_authenticated:
         return redirect(url_for('index'))
     if 'error' in request.args: # Good Q: 'what are request.args here, why do they matter?'
@@ -440,6 +441,7 @@ def callback():
             db.session.add(user)
             db.session.commit()
             login_user(user)
+            print('work')
             return redirect(url_for('index'))
         return 'Could not fetch your information.'
 
