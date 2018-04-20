@@ -4,6 +4,14 @@
 
 <h1>Saved Actors</h1>
 
+{% block contents %}
+<div>
+{% for message in get_flashed_messages() %}
+<strong>*** {{ message }} ***</strong>
+{% endfor %}
+</div>
+{% endblock %}
+
 <ul>
 {% for actor in actors %}
     <li>
@@ -17,14 +25,5 @@
         </ul>
 {% endfor %}
 </ul>
-
-{% block contents %}
-<div>
-{% for message in get_flashed_messages() %}
-<strong>*** {{ message }} ***</strong>
-{% endfor %}
-</div>
-
-{% endblock %}
 
 {% endblock %}

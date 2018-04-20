@@ -61,7 +61,7 @@ class Auth:
     """Google Project Credentials"""
     CLIENT_ID = ('696837306131-q8s3csk0sa0t5b3dhrof60beid7o87he.apps.googleusercontent.com') # Keep the parentheses in THIS line!
     CLIENT_SECRET = '8g-p5lZcA1beXdJxQ9XUeuE7'
-    REDIRECT_URI = 'https://si364finaljllai.herokuapp.com' # Our (programmer's) decision
+    REDIRECT_URI = 'https://si364finaljllai.herokuapp.com/gCallback' # Our (programmer's) decision
     # URIs determined by Google, below
     AUTH_URI = 'https://accounts.google.com/o/oauth2/auth'
     TOKEN_URI = 'https://accounts.google.com/o/oauth2/token'
@@ -165,6 +165,7 @@ def get_person_credits(person):
 def get_or_create_movie(id):
     m = Movie.query.filter_by(tmdb_id=id).first()
     if m:
+        flash('Already saved!')
         return m
     else:
         id = int(id)
@@ -178,11 +179,14 @@ def get_or_create_movie(id):
         db.session.add(m)
         db.session.commit()
         current_user.movies.append(m)
+        flash("Successfully saved")
         return m
 
 def get_or_create_actor(id):
-    a = Actor.query.filter_by(id=id).first()
+    a = Actor.query.filter_by(tmdb_id=id).first()
+    print(a)
     if a:
+        flash('Already saved!')
         return a
     else:
         id = int(id)
@@ -195,6 +199,7 @@ def get_or_create_actor(id):
         db.session.add(a)
         db.session.commit()
         current_user.actors.append(a)
+        flash("Successfully saved")
         return a
 
 def get_or_create_director(name, tmdb_id):
@@ -279,10 +284,6 @@ class SearchForm(FlaskForm):
     director = StringField("What director would you like to look up?")
     submit = SubmitField('submit')
 
-    def validate_actor(field, self):
-        if ' ' not in field.data:
-            raise ValidationError("Needs last name!")
-
 class Save(FlaskForm):
     submit = SubmitField("Save")
 
@@ -320,7 +321,6 @@ def index():
         movie_info = get_movie_info(form.movie.data)
         return render_template('movie_results.html', movies=movie_info['results'], form=save_form)
     elif request.args and request.args.get('movie') == None:
-        print(request.args.get('movie'))
         save_form = Save()
         actor_info = get_person_info(request.args.get('actor'))
         return render_template('actor_results.html', actors=actor_info['results'], form=save_form)
@@ -337,7 +337,6 @@ def movie_results(id):
     movie.saved = True
     d = Director.query.filter_by(id=movie.director_id).first()
     d.saved = True
-    flash("Successfully saved")
     return redirect(url_for('all_movies'))
 
 # renders template to show all movies you save and their scores
@@ -349,8 +348,8 @@ def all_movies():
 
 @app.route('/actor/<id>', methods=['GET','POST'])
 def actor_results(id):
+    print(id)
     get_or_create_actor(id)
-    flash("Successfully saved")
     return redirect(url_for('all_actors'))
 
 @app.route('/all_actors', methods=['GET', 'POST'])

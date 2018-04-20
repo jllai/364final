@@ -3,6 +3,14 @@
 
 <h1>Saved Movies</h1>
 
+{% block contents %}
+<div>
+{% for message in get_flashed_messages() %}
+<strong>*** {{ message }} ***</strong>
+{% endfor %}
+</div>
+{% endblock %}
+
 <ul>
 {% for m in movies %}
 	{% if m.saved == 1 %}
@@ -23,14 +31,5 @@
     {% endif %}
 {% endfor %}
 </ul>
-
-{% block contents %}
-<div>
-{% for message in get_flashed_messages() %}
-<strong>*** {{ message }} ***</strong>
-{% endfor %}
-</div>
-{% endblock %}
-
 
 {% endblock %}
