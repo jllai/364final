@@ -59,8 +59,8 @@ manager.add_command("shell", Shell(make_context=make_shell_context))
 # OAuth configuration -- code lifted from Lecture 13
 class Auth:
     """Google Project Credentials"""
-    CLIENT_ID = ('933362687091-1sf12pk1amcgfm7jjs7nr5ti25eb9qs6.apps.googleusercontent.com') # Keep the parentheses in THIS line!
-    CLIENT_SECRET = '-OFBS31kYDWMVJBN7KzpRh_T'
+    CLIENT_ID = ('696837306131-q8s3csk0sa0t5b3dhrof60beid7o87he.apps.googleusercontent.com') # Keep the parentheses in THIS line!
+    CLIENT_SECRET = '8g-p5lZcA1beXdJxQ9XUeuE7'
     REDIRECT_URI = 'https://si364finaljllai.herokuapp.com/gCallback' # Our (programmer's) decision
     # URIs determined by Google, below
     AUTH_URI = 'https://accounts.google.com/o/oauth2/auth'
