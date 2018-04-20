@@ -2,7 +2,7 @@
 
 ## Quick Summary
 
-This application allows users to register and sign in to their own personal movies collection. They'll be able to search for any movie on TMDb and see the ratings and critic reviews for the movie that they search for. They can also look for any actor or director for their filmography and add it to a personal collection. They'll be able to personally rate the movies that they watch, and will have 3 sections: saved directors, saved actors, and saved movies. 
+This application allows users to register and sign in to their own personal movies collection. They'll be able to search for any movie on TMDb and see the ratings and movie info that they search for. They can also look for any actor for their filmography and add it to a personal collection. They'll be able to personally rate the movies that they watch, and will have 3 sections: saved directors, saved actors, and saved movies. 
 
 ## How to use the program
 
@@ -11,8 +11,6 @@ The user will need to first log into their google account for the program to wor
 ## Modules
 
 No additional modules are used
-
-
 
 ## Routes:
 
@@ -30,7 +28,7 @@ No additional modules are used
 
 ## Checklist:
 
- ** user should be able to load http://localhost:5000 and see the first page they ought to see on the application.**
+ **user should be able to load http://localhost:5000 and see the first page they ought to see on the application.**
 
  **Include navigation in base.html with links (using a href tags) that lead to every other page in the application that a user should be able to click on. (e.g. in the lecture examples from the Feb 9 lecture, like this )**
 

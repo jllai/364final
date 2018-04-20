@@ -15,11 +15,15 @@
 	{{ form.submit() }}
 </form>
 
+{% endblock %}
+
+{% block contents %}
 <div>
 {% for message in get_flashed_messages() %}
-    {{ message }}
+<strong>*** {{ message }} ***</strong>
 {% endfor %}
 </div>
+
 {% endblock %}
 
 

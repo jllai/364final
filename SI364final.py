@@ -33,7 +33,7 @@ app.use_reloader = True
 
 ## All app.config values
 app.config['SECRET_KEY'] = 'hard to guess string'
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get('DATABASE_URL') or "postgresql://Jamie@localhost:5432/SI364final" # TODO: May need to change this, Windows users -- probably by adding postgres:YOURTEXTPW@localhost instead of just localhost. Or just like you did in section or lecture before! Everyone will need to have created a db with exactly this name, though.
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get('DATABASE_URL') or "postgresql://Jamie@localhost:5432/SI364finaljllai" # TODO: May need to change this, Windows users -- probably by adding postgres:YOURTEXTPW@localhost instead of just localhost. Or just like you did in section or lecture before! Everyone will need to have created a db with exactly this name, though.
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['HEROKU_ON'] = os.environ.get('HEROKU')
@@ -209,8 +209,6 @@ def get_or_create_director(name, tmdb_id):
         db.session.commit()
         return d
 
-
-
 ##################
 ##### MODELS #####
 ##################
@@ -281,10 +279,9 @@ class SearchForm(FlaskForm):
     director = StringField("What director would you like to look up?")
     submit = SubmitField('submit')
 
-    def validate_movie(field, self):
-        if len(field.data) > 100:
-            print(field.data)
-            raise ValidationError('Movie title too long!')
+    def validate_actor(field, self):
+        if ' ' not in field.data:
+            raise ValidationError("Needs last name!")
 
 class Save(FlaskForm):
     submit = SubmitField("Save")
@@ -296,7 +293,7 @@ class ButtonForm(FlaskForm):
 
     def validate_personal_rating(self, field):
         if float(field.data) < 0 or float(field.data) > 10:
-            raise ValidationError("Rating outside of range!")
+            raise ValidationError(message="Rating outside of range!")
 
 
 #######################
@@ -322,7 +319,7 @@ def index():
         save_form = Save()
         movie_info = get_movie_info(form.movie.data)
         return render_template('movie_results.html', movies=movie_info['results'], form=save_form)
-    elif request.args and request.args.get('movie') == None:
+    if request.args and request.args.get('movie') == None:
         save_form = Save()
         actor_info = get_person_info(request.args.get('actor'))
         return render_template('actor_results.html', actors=actor_info['results'], form=save_form)
@@ -377,6 +374,11 @@ def update(movie):
         db.session.commit()
         flash("Updated rating of " + movie)
         return redirect(url_for('all_movies'))
+
+    errors = [v for v in form.errors.values()]
+    if len(errors) > 0:
+        flash(str(errors))
+
     return redirect(url_for('all_movies'))
 # deletes the movie from your saved movies
 @app.route('/delete/<movie>',methods=["GET","POST"])
