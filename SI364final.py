@@ -61,7 +61,7 @@ class Auth:
     """Google Project Credentials"""
     CLIENT_ID = ('696837306131-q8s3csk0sa0t5b3dhrof60beid7o87he.apps.googleusercontent.com') # Keep the parentheses in THIS line!
     CLIENT_SECRET = '8g-p5lZcA1beXdJxQ9XUeuE7'
-    REDIRECT_URI = 'http://localhost:5000/gCallback' # Our (programmer's) decision
+    REDIRECT_URI = 'https://si364finaljllai.herokuapp.com/gCallback' # Our (programmer's) decision
     # URIs determined by Google, below
     AUTH_URI = 'https://accounts.google.com/o/oauth2/auth'
     TOKEN_URI = 'https://accounts.google.com/o/oauth2/token'
@@ -397,7 +397,7 @@ def login():
         return redirect(url_for('index'))
     google = get_google_auth() # login with google
     auth_url, state = google.authorization_url(
-        Auth.AUTH_URI, access_type='offline')
+        Auth.AUTH_URI, access_type='online')
     session['oauth_state'] = state
     return render_template('login.html', auth_url=auth_url)
 
