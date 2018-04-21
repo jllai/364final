@@ -74,7 +74,7 @@ No additional modules are used
 
  **At least one WTForm that sends data with a POST request to a new page. (NOT counting the login or registration forms provided for you in class.)**
 
- At least two custom validators for a field in a WTForm, NOT counting the custom validators included in the log in/auth code.
+ **At least two custom validators for a field in a WTForm, NOT counting the custom validators included in the log in/auth code.**
 
  **Include at least one way to update items saved in the database in the application (like in HW5).**
 
