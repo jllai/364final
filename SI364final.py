@@ -397,7 +397,7 @@ def login():
         return redirect(url_for('index'))
     google = get_google_auth() # login with google
     auth_url, state = google.authorization_url(
-        Auth.AUTH_URI, access_type='online')
+        Auth.AUTH_URI, access_type='offline')
     session['oauth_state'] = state
     return render_template('login.html', auth_url=auth_url)
 
